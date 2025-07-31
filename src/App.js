@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import FormularioCustomHook from "./components/FormularioCustomHook/FormularioCustomHook";
 
-function App() {
+const App = () => {
+  const [usuarios, setUsuarios] = useState([]);
+
+  const agregarUsuario = (nuevoUsuario) => {
+    setUsuarios([...usuarios, nuevoUsuario]);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <FormularioCustomHook
+        agregarUsuario={agregarUsuario}
+      ></FormularioCustomHook>
+
+      <ul>
+        {usuarios.map((usuario) => (
+          <li key={usuario.email}>{usuario.email}</li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
 export default App;
